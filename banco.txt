@@ -1,0 +1,8 @@
+CREATE DATABASE passcontrol1;
+use passcontrol1;
+CREATE TABLE guiche(
+id_guiche int not null auto_increment,
+num_guiche varchar(50),
+nome_guiche varchar(100),
+primary key(id_guiche)
+);
