@@ -3,7 +3,7 @@
 Class Database{
     private $conn;
     private string $local = 'localhost';
-    private string $db = 'passcontrol1';
+    private string $db = 'passcontrol';
     private string $user = 'root';
     private string $password = '';
     private string $table = 'guiche';
@@ -18,6 +18,7 @@ Class Database{
         try{
             $this->conn = new PDO("mysql:host=".$this->local.";dbname=$this->db",$this->user,$this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo 'conectou';
         }catch(PDOException $err){
             die("Connection Failed". $err->getMessage());
         }

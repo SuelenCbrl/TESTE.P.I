@@ -14,3 +14,4 @@ ALTER TABLE guiche DROP id_usuario;
 
 ALTER TABLE guiche add column num_guiche varchar(50);
 ALTER TABLE guiche add column nome_guiche varchar(100);
+ALTER TABLE `guiche` CHANGE `id_guiche` `id_guiche` INT(11) NOT NULL AUTO_INCREMENT;
