@@ -1,8 +1,344 @@
-CREATE DATABASE passcontrol1;
-use passcontrol1;
-CREATE TABLE guiche(
-id_guiche int not null auto_increment,
-num_guiche varchar(50),
-nome_guiche varchar(100),
-primary key(id_guiche)
-);
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 07/03/2025 às 16:21
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.0.30
+
+
+####################################
+$host = "192.168.22.9";
+
+$dbname = "passcontrol";
+
+$usuario = "fabrica32";
+
+$senha = "fabrica2025";
+####################################
+
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Banco de dados: `passcontrol`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `atendimento`
+--
+
+CREATE TABLE `atendimento` (
+  `id_atendimento` int(11) NOT NULL,
+  `senha` varchar(10) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `id_dados_atendimento` int(11) DEFAULT NULL,
+  `id_guiche` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `dados_atendimento`
+--
+
+CREATE TABLE `dados_atendimento` (
+  `id_dados_atendimento` int(11) NOT NULL,
+  `hora_inicio` datetime DEFAULT NULL,
+  `hora_fim` datetime DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `id_senha` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `guiche`
+--
+
+CREATE TABLE `guiche` (
+  `id_guiche` int(11) NOT NULL,
+  `num_guiche` varchar(50) DEFAULT NULL,
+  `nome_guiche` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `imagem_servico`
+--
+
+CREATE TABLE `imagem_servico` (
+  `id_imagem_servico` int(11) NOT NULL,
+  `imagem` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `perfil`
+--
+
+CREATE TABLE `perfil` (
+  `id_perfil` int(11) NOT NULL,
+  `nome` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `perfil`
+--
+
+INSERT INTO `perfil` (`id_perfil`, `nome`) VALUES
+(1, 'Game Experience'),
+(2, 'Fábrica de Software'),
+(3, 'teste'),
+(4, 'teste');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `perfil_permissao`
+--
+
+CREATE TABLE `perfil_permissao` (
+  `id_perfil` int(11) NOT NULL,
+  `id_permissoes` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `permissoes`
+--
+
+CREATE TABLE `permissoes` (
+  `id_permissoes` int(11) NOT NULL,
+  `tipo_permissoes` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `senha_atendimento`
+--
+
+CREATE TABLE `senha_atendimento` (
+  `id_senha_atendimento` int(11) NOT NULL,
+  `tipo_atendimento` enum('comum','preferencial') DEFAULT NULL,
+  `servico` varchar(100) DEFAULT NULL,
+  `nome` varchar(200) DEFAULT NULL,
+  `sobrenome` varchar(200) DEFAULT NULL,
+  `telefone` char(11) DEFAULT NULL,
+  `senha` varchar(10) DEFAULT NULL,
+  `id_servico` int(11) NOT NULL,
+  `status_senha` enum('gerada','em-atendimento','finalizada') DEFAULT 'gerada'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `servico`
+--
+
+CREATE TABLE `servico` (
+  `id_servico` int(11) NOT NULL,
+  `nome_servico` varchar(100) DEFAULT NULL,
+  `codigo_servico` char(5) DEFAULT NULL,
+  `id_imagem_servico` int(11) DEFAULT NULL,
+  `id_atendimento` int(11) DEFAULT NULL,
+  `id_guiche` int(11) DEFAULT NULL,
+  `id_senha` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id_usuario` int(11) NOT NULL,
+  `nome` varchar(200) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `cpf` char(11) NOT NULL,
+  `senha` char(60) NOT NULL,
+  `id_perfil` int(11) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `status` enum('online','offline') DEFAULT 'offline',
+  `ultimo_login` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuario_status_atendimento`
+--
+
+CREATE TABLE `usuario_status_atendimento` (
+  `id_status_atendimento` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `status` enum('disponivel','em-atendimento','intervalo') NOT NULL,
+  `data_inicio` datetime NOT NULL DEFAULT current_timestamp(),
+  `data_fim` datetime DEFAULT NULL,
+  `id_senha_atendimento` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices de tabela `atendimento`
+--
+ALTER TABLE `atendimento`
+  ADD PRIMARY KEY (`id_atendimento`);
+
+--
+-- Índices de tabela `dados_atendimento`
+--
+ALTER TABLE `dados_atendimento`
+  ADD PRIMARY KEY (`id_dados_atendimento`);
+
+--
+-- Índices de tabela `guiche`
+--
+ALTER TABLE `guiche`
+  ADD PRIMARY KEY (`id_guiche`);
+
+--
+-- Índices de tabela `imagem_servico`
+--
+ALTER TABLE `imagem_servico`
+  ADD PRIMARY KEY (`id_imagem_servico`);
+
+--
+-- Índices de tabela `perfil`
+--
+ALTER TABLE `perfil`
+  ADD PRIMARY KEY (`id_perfil`);
+
+--
+-- Índices de tabela `perfil_permissao`
+--
+ALTER TABLE `perfil_permissao`
+  ADD PRIMARY KEY (`id_perfil`,`id_permissoes`);
+
+--
+-- Índices de tabela `permissoes`
+--
+ALTER TABLE `permissoes`
+  ADD PRIMARY KEY (`id_permissoes`);
+
+--
+-- Índices de tabela `senha_atendimento`
+--
+ALTER TABLE `senha_atendimento`
+  ADD PRIMARY KEY (`id_senha_atendimento`);
+
+--
+-- Índices de tabela `servico`
+--
+ALTER TABLE `servico`
+  ADD PRIMARY KEY (`id_servico`);
+
+--
+-- Índices de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `cpf` (`cpf`);
+
+--
+-- Índices de tabela `usuario_status_atendimento`
+--
+ALTER TABLE `usuario_status_atendimento`
+  ADD PRIMARY KEY (`id_status_atendimento`);
+
+--
+-- AUTO_INCREMENT para tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `atendimento`
+--
+ALTER TABLE `atendimento`
+  MODIFY `id_atendimento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `dados_atendimento`
+--
+ALTER TABLE `dados_atendimento`
+  MODIFY `id_dados_atendimento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `guiche`
+--
+ALTER TABLE `guiche`
+  MODIFY `id_guiche` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `imagem_servico`
+--
+ALTER TABLE `imagem_servico`
+  MODIFY `id_imagem_servico` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `perfil`
+--
+ALTER TABLE `perfil`
+  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `perfil_permissao`
+--
+ALTER TABLE `perfil_permissao`
+  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `permissoes`
+--
+ALTER TABLE `permissoes`
+  MODIFY `id_permissoes` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `senha_atendimento`
+--
+ALTER TABLE `senha_atendimento`
+  MODIFY `id_senha_atendimento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `servico`
+--
+ALTER TABLE `servico`
+  MODIFY `id_servico` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `usuario_status_atendimento`
+--
+ALTER TABLE `usuario_status_atendimento`
+  MODIFY `id_status_atendimento` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+

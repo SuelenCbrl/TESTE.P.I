@@ -3,12 +3,12 @@
 Class Database{
     private $conn;
     private string $local = 'localhost';
-    private string $db = 'passcontrol1';
+    private string $db = 'passcontrol';
     private string $user = 'root';
     private string $password = '';
     private string $table = 'guiche';
 
-    function __construct($table = null){
+    function __construct($table = 'guiche'){
         $this->table = $table;
         $this->conecta();
 
@@ -33,7 +33,8 @@ Class Database{
         }
     }
 
-    public function insert($values){
+
+    public function create($values){
         $fields = array_keys($values);
     
         $binds = array_pad([], count($fields), '?');
@@ -48,14 +49,16 @@ Class Database{
     
 
 
-    public function select($where = null, $order = null, $limit = null, $fields = '*'){
+    public function read($where = null, $order = null, $limit = null, $fields = '*'){
         $where = strlen($where) ? 'WHERE '.$where : '';
         $order = strlen($order) ? 'ORDER BY '.$order : '';
         $limit = strlen($limit) ? 'LIMIT '.$limit : '';
 
         $query = 'SELECT '.$fields.' FROM '.$this->table. ' '.$where. ' '.$order . ' '.$limit ;
 
-        return $this->execute($query);
+        $stmt = $this->execute($query);
+    
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
