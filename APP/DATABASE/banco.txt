@@ -1,8 +1,16 @@
-CREATE DATABASE passcontrol1;
-use passcontrol1;
+CREATE DATABASE passcontrol;
+use passcontrol;
 CREATE TABLE guiche(
 id_guiche int not null auto_increment,
 num_guiche varchar(50),
 nome_guiche varchar(100),
 primary key(id_guiche)
 );
+
+
+ALTER TABLE guiche DROP usuario;
+ALTER TABLE guiche DROP servico;
+ALTER TABLE guiche DROP id_usuario;
+
+ALTER TABLE guiche add column num_guiche varchar(50);
+ALTER TABLE guiche add column nome_guiche varchar(100);
