@@ -2,7 +2,6 @@
 require_once './APP/CLASSE/guiche.php';
 $usuario = new Guiche();
 $dados = $usuario->buscar();
-print_r($dados);
 ?>
 
 <!DOCTYPE html>
@@ -12,10 +11,7 @@ print_r($dados);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./APP/public/css/PontoAtendimentoCad.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-  
 
 </head>
 <section class="Area-Util-Projeto">
@@ -44,11 +40,11 @@ print_r($dados);
                         echo
                         '
                     <tr>
-                        
-                        <td>'.$usuario->num_guiche.'</td>
                         <td>'.$usuario->nome_guiche.'</td>
+                        <td>'.$usuario->num_guiche.'</td>
                         <td><a href="./editar_guiche.php?id_user='.$usuario->id_guiche.'"class="btn btn-primary"><i class="bi bi-pencil-square"></i></td>
-                        <td><a href="./excluir_guiche.php?id_guiche='.$usuario->id_guiche.'"class="btn btn-danger"> <i class="bi bi-trash"></i></td>
+                        <td>
+                        <div class="toggle-btn ativo"><div class="circulo"></div></div></td>
                     </tr>
                     ';
                     }

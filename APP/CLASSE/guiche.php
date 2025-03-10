@@ -25,5 +25,30 @@ Class Guiche{
         $res = $db->delete('id_guiche ='.$this->id_guiche);
         return $res;
     }
+    public function editar(){
+        $db = new Database('Guiche');
+        $res= $db->update(
+            'Guiche',
+            [
+                "nome_guiche"=>$this->nome_guiche,
+                "num_guiche"=>$this->num_guiche
+            ],
+            'id_guiche='.$this->id_guiche
+        );
+        return $res;
 
+    }
+
+    public function alternar_ativo(){
+        $db = new Database('Guiche');
+        $obj = $this->buscar_por_id($this->id_guiche); 
+        $novo_ativo = ($obj->ativo == 1) ? 0 : 1;
+        $res = $db->update(
+            'Guiche',
+            ['ativo' => $novo_ativo],
+            'id_guiche = ' . $this->id_guiche 
+        );
+        return $res; 
+    }
+    
 }
