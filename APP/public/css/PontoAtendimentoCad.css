@@ -64,7 +64,7 @@
   padding: 1px;
 }
 #tela-branca-Ponto-atendimento {
-  background-color: #453a6e1f;
+  background-color: #ffffff75;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
   width: 96%;
   padding: 20px;
@@ -96,17 +96,17 @@
 }
 
 .cabecalho-tabela1{
-  color: #1a036b;
+  color: #030a68;
   width: 30%;
   height: 10%;
 }
 .cabecalho-tabela2{
-  color: #160458;
+  color: #030a68;
   width: 30%;
   height: 30px;
 }
 .cabecalho-tabela3{
-  color: #120152;
+  color: #030a68;
   width: 7%;
   height: 30px;
 }
@@ -144,7 +144,7 @@
 .toggle-btn {
   width: 60px;
   height: 20px;
-  background-color: #1f0091;
+  background-color: #a8a8aa;
   border-radius: 10px;
   position: relative;
   border: 1px solid var(--cinza-control);
