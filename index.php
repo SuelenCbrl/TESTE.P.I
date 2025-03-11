@@ -31,7 +31,7 @@ $dados = $usuario->buscar();
                       <th scope="col" class="cabecalho-tabela1">Tipo</th>
                       <th scope="col" class="cabecalho-tabela2">Identificador</th>
                       <th scope="col" class="cabecalho-tabela3">Editar</th>
-                      <th scope="col" class="cabecalho-tabela1">Ativar/ Desativar</th>
+                      <th scope="col" class="cabecalho-tabela1">Desativar/Ativar</th>
                     </tr>
                   </thead>
                   <tbody class="resto-tabela-Ponto-atendimento">
@@ -43,8 +43,7 @@ $dados = $usuario->buscar();
                         <td>'.$usuario->nome_guiche.'</td>
                         <td>'.$usuario->num_guiche.'</td>
                         <td><a href="./editar_guiche.php?id_user='.$usuario->id_guiche.'"class="btn btn-primary"><i class="bi bi-pencil-square"></i></td>
-                        <td>
-                        <div class="toggle-btn ativo"><div class="circulo"></div></div></td>
+                        <td><a href="./inativar_guiche.php?id_guiche='.$usuario->id_guiche.'"class="btn btn-danger"><div class="toggle-btn ativo"><div class="circulo"></div></div></td>
                     </tr>
                     ';
                     }
