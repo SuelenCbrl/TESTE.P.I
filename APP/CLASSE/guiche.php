@@ -28,6 +28,19 @@ Class Guiche{
         return $ob;
     }
 
+    
+    public function criar(){
+        $db = new Database('guiche');
+        $res = $db->insert(
+            [
+                'num_guiche' => $this->num_guiche,
+                'nome_guiche' => $this->nome_guiche,
+                'ativo' => 'ATIVO'
+            ]
+        );
+        return $res;
+    }
+
     public function editar(){
         $db = new Database('guiche');
         $res= $db->update("id_guiche =".$this->id_guiche,
@@ -53,4 +66,5 @@ Class Guiche{
         $res = $db->delete('id_guiche ='.$this->id_guiche);
         return $res;
     }
+
 }
