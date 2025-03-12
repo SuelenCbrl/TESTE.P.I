@@ -1,7 +1,7 @@
 <?php
 require_once './APP/CLASSE/guiche.php';
-$usuario = new Guiche();
-$dados = $usuario->buscar();
+$guiche = new Guiche();
+$dados = $guiche->buscar();
 ?>
 
 <!DOCTYPE html>
@@ -35,19 +35,25 @@ $dados = $usuario->buscar();
                     </tr>
                   </thead>
                   <tbody class="resto-tabela-Ponto-atendimento">
-                <?PHP
-                    foreach($dados as $usuario){
-                        echo
-                        '
-                    <tr>
-                        <td>'.$usuario->nome_guiche.'</td>
-                        <td>'.$usuario->num_guiche.'</td>
-                        <td><a href="./editar_guiche.php?id_user='.$usuario->id_guiche.'"class="btn btn-primary"><i class="bi bi-pencil-square"></i></td>
-                        <td><a href="./inativar_guiche.php?id_guiche='.$usuario->id_guiche.'"class="btn btn-danger"><div class="toggle-btn ativo"><div class="circulo"></div></div></td>
-                    </tr>
-                    ';
-                    }
-                ?>
+                  <?php
+                        foreach($dados as $guiche) {
+                            $estadoAtivo = ($guiche->ativo == 'ATIVO') ? 'active' : '';
+                            echo '
+                              <tr>
+                                  <td>'.$guiche->nome_guiche.'</td>
+                                  <td>'.$guiche->num_guiche.'</td>
+                                  <td><a href="./editar_guiche.php?id_user='.$guiche->id_guiche.'"class="btn btn-primary"><i class="bi bi-pencil-square"></i></td>
+                                  <td>
+                                    <a href="./inativar_guiche.php?id_guiche='.$guiche->id_guiche.'" class="btn btn-danger">
+                                      <div class="toggle-btn '.$estadoAtivo.'">
+                                        <div class="circulo"></div>
+                                      </div>
+                                    </a>
+                                  </td>
+                              </tr>
+                            ';
+                        }
+                  ?>
                   </tbody>
                 </table>
               </div>

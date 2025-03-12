@@ -77,7 +77,8 @@
 }
 .tabela-Ponto-atendimento {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 .cabecaTabelaPonto-atendimento{
   width: fit-content;
@@ -96,17 +97,17 @@
 }
 
 .cabecalho-tabela1{
-  color: #030a68;
+  color: #ffffff;
   width: 30%;
   height: 10%;
 }
 .cabecalho-tabela2{
-  color: #030a68;
+  color: #ffffff;
   width: 30%;
   height: 30px;
 }
 .cabecalho-tabela3{
-  color: #030a68;
+  color: #ffffff;
   width: 7%;
   height: 30px;
 }
@@ -115,7 +116,7 @@
   justify-content: space-between;
 }
 .tabela-Ponto-atendimento th {
-  background-color: var(--cinza-control);
+  background-color: #0a0d3f;
   font-size: 16px;
   font-weight: bold;
   position: sticky;
