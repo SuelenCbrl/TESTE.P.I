@@ -1,5 +1,6 @@
 <?php
-require_once './APP/CLASSE/guiche.php';
+// require_once './APP/CLASSE/guiche.php';
+require __DIR__ . '/../DATABASE/Database.php';
 $usuario = new Guiche();
 $dados = $usuario->buscar();
 ?>
