@@ -1,0 +1,16 @@
+const toggleButtons = document.querySelectorAll('.toggle-btn');
+
+toggleButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        const confirmacao = confirm("Você realmente deseja desativar este guichê?");
+
+        if (confirmacao) {
+            const idGuiche = button.closest('tr').querySelector('.id-guiche').value;  
+            window.location.href = `./inativar_guiche.php?id_guiche=${idGuiche}`; 
+        } else {
+            // Se o usuário clicar em "Cancelar", não faz nada
+            return false;
+        }
+    });
+});

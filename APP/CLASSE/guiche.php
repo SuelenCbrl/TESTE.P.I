@@ -43,12 +43,13 @@ Class Guiche{
 
     public function editar(){
         $db = new Database('guiche');
-        $res= $db->update("id_guiche =".$this->id_guiche,
-            [
-                "nome_guiche"=>$this->nome_guiche,
-                "num_guiche"=>$this->num_guiche
-            ],
-        );
+        $dados=[
+            'nome_guiche'=>$this->nome_guiche,
+            'num_guiche'=>$this->num_guiche
+        ];
+        $where = 'id_guiche = ' . $this->id_guiche;
+
+        $res=$db->update($where,$dados);
         return $res;
     }
 
