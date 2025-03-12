@@ -1,7 +1,7 @@
 <?php
 require_once './APP/CLASSE/guiche.php';
-$guiche = new Guiche();
-$dados = $guiche->buscar();
+$usuario = new Guiche();
+$dados = $usuario->buscar();
 ?>
 
 <!DOCTYPE html>
