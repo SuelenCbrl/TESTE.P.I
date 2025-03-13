@@ -3,6 +3,11 @@
   box-sizing: border-box;
 }
 
+h1 {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
 #PontoAtendimentoCad {
   z-index: 1;
   top: 157px;
