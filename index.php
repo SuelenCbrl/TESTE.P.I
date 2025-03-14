@@ -80,7 +80,7 @@ $guiches = $guiche->buscar();
                               <tr>
                                   <td>'.$guiche->nome_guiche.'</td>
                                   <td>'.$guiche->num_guiche.'</td>
-                                  <td><a href="./editar_guiche.php?id_user='.$guiche->id_guiche.'"class="btn btn-primary"><i class="bi bi-pencil-square"></i></td>
+                                  <td><a href="./editar_guiche.php?id_guiche='.$guiche->id_guiche.'"class="btn btn-primary"><i class="bi bi-pencil-square"></i></td>
                                   <td>
                                     <a href="./inativar_guiche.php?id_guiche='.$guiche->id_guiche.'">
                                       <div class="toggle-btn '.$estadoAtivo.'">
