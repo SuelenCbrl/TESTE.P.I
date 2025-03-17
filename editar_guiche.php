@@ -10,17 +10,17 @@ if (isset($_GET['id_guiche'])) {
     
         $gui_edit->num_guiche = $_POST['num_guiche'];
         $gui_edit->nome_guiche = $_POST['nome_guiche'];
-        $gui_edit->ativo = $_POST['ativo'];
         
         
         $gui_edit->editar();
         
         
-        header('Location: gerenciar_guiches.php?success=true');
+        header('Location: index.php?success=true');
         exit;
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -47,17 +47,9 @@ if (isset($_GET['id_guiche'])) {
             <input type="text" class="form-control" id="nome_guiche" name="nome_guiche" value="<?php echo $gui_edit->nome_guiche; ?>" required>
         </div>
 
-        <div class="mb-3">
-            <label for="ativo" class="form-label">Status</label>
-            <select class="form-control" id="ativo" name="ativo">
-                <option value="ATIVO" <?php echo $gui_edit->ativo == 'ATIVO' ? 'selected' : ''; ?>>Ativo</option>
-                <option value="INATIVO" <?php echo $gui_edit->ativo == 'INATIVO' ? 'selected' : ''; ?>>Inativo</option>
-            </select>
-        </div>
 
         <div class="text-center">
-            <!-- <button type="submit" class="btn btn-primary">Salvar Alterações</button> -->
-            <a href="index.php" class="btn btn-primary">Salvar Alterações</a>
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
         </div>
     </form>
 

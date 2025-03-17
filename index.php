@@ -35,7 +35,7 @@ $guiches = $guiche->buscar();
             <div class="tabela-responsiva-Ponto-atendimento">
             
                 <div class="card p-4 shadow-sm mb-4">
-                    <h4 class="mb-3">Criar Novo Guichê</h4>
+                    <h4 class="mb-3">Cadastrar Novo Guichê</h4>
                     <form action="criar_guiche.php" method="POST" onsubmit="return confirmarCriacao()">
                         <table class="table tabela-Ponto-atendimento">
                             <tbody>
@@ -49,7 +49,7 @@ $guiches = $guiche->buscar();
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-center">
-                                        <button type="submit" class="btn btn-success"><i class="bi bi-plus-circle"></i> Criar Guichê</button>
+                                        <button type="submit" class="btn btn-success"></>Salvar</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -81,12 +81,15 @@ $guiches = $guiche->buscar();
                                   <td>'.$guiche->nome_guiche.'</td>
                                   <td>'.$guiche->num_guiche.'</td>
                                   <td><a href="./editar_guiche.php?id_guiche='.$guiche->id_guiche.'"class="btn btn-primary"><i class="bi bi-pencil-square"></i></td>
+                                  
+
+
                                   <td>
-                                    <a href="./inativar_guiche.php?id_guiche='.$guiche->id_guiche.'">
-                                      <div class="toggle-btn '.$estadoAtivo.'">
-                                        <div class="circulo"></div>
-                                      </div>
-                                    </a>
+                                      <!-- Botão que abre o modal de confirmação -->
+                                      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#confirmModal" data-guiche-id="<?php                                   
+                                      echo $guiche->id_guiche; ?>">
+                                          <i class="bi bi-toggle-on"></i> Ativar/Desativar
+                                      </button>
                                   </td>
 
 
@@ -96,6 +99,27 @@ $guiches = $guiche->buscar();
                   ?>
                   
                   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+                  <!-- Modal de Confirmação -->
+                  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="confirmModalLabel">Confirmar Alteração</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                  Tem certeza que deseja ativar/desativar este guichê?
+                              </div>
+                              <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <!-- Botão de confirmação, que vai redirecionar para a ação -->
+                                  <a id="confirmButton" href="#" class="btn btn-danger">Confirmar</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
 
                   </tbody>
                 </table>

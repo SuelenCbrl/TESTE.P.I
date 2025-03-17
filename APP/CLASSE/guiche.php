@@ -43,14 +43,21 @@ Class Guiche{
 
     public function editar(){
         $db = new Database('guiche');
-        $res= $db->update("id_guiche =".$this->id_guiche,
-            [
-                "nome_guiche"=>$this->nome_guiche,
-                "num_guiche"=>$this->num_guiche
-            ],
-        );
-        return $res;
+        
+        $sql = "UPDATE guiche SET nome_guiche = :nome_guiche, num_guiche = :num_guiche WHERE id_guiche = :id_guiche";
+        
+        $binds = [
+            ':nome_guiche' => $this->nome_guiche,
+            ':num_guiche' => $this->num_guiche,
+            ':id_guiche' => $this->id_guiche
+        ];
+    
+        $res = $db->execute($sql, $binds);
+        
+        return $res ? true : false;
     }
+    
+    
 
     public function alternar_ativo($id_guiche,$status){
         $db = new Database('guiche');
