@@ -57,15 +57,24 @@ Class Guiche{
         return $res ? true : false;
     }
     
-    
 
-    public function alternar_ativo($id_guiche,$status){
+
+    public function alternar_ativo($id_guiche, $status) {
         $db = new Database('guiche');
-        $status_alternar = $status == 'ATIVO' ? 'INATIVO' : 'ATIVO';
+        $status_alternar = ($status == 'ATIVO') ? 'INATIVO' : 'ATIVO';
+    
+        $sql = "UPDATE guiches SET ativo = :status WHERE id_guiche = :id_guiche";
 
-        $res = $db->update('id_guiche = ' .$id_guiche , ['ativo' => $status_alternar] );
-        return $res; 
+        $params = [
+            ':status' => $status_alternar,
+            ':id_guiche' => $id_guiche
+        ];
+        
+        $res = $db->execute($sql, $params);
+        
+        return $res;
     }
+    
 
 
     public function excluir(){
